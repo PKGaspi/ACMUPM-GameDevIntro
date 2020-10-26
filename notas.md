@@ -7,6 +7,15 @@
 ## Interfaz de Godot
 ### Importar assets
 Opciones de importado (desactivar filtrado bilineal)
+### Ajustes de proyecto
+Vamos a cambiar algunos ajustes (Proyecto -> Ajustes de Proyecto).
+Bajo Display -> Window:
+- Size
+    + Width: 480
+    + Height: 270
+- Stretch
+    + Mode: 2D
+    + Aspect: Keep
 ## Orientación a objetos
 
 # Programar el juego
