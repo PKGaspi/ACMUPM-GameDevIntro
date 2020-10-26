@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 const SPEED = 200
+const BULLET = preload("res://Bullet.tscn")
 
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -38,4 +39,7 @@ func _unhandled_input(event: InputEvent):
 
 
 func shoot():
-	pass
+	var bullet = BULLET.instance()
+	bullet.rotation = rotation
+	bullet.position = position
+	get_parent().add_child(bullet)

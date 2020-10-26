@@ -88,3 +88,44 @@ func _physics_process(delta: float):
 Antes de plantearnos cómo disparar... Necesitaremos algo que disparar, ¿no? Vamos a crear una escena para representar una bala. La raíz será un nodo Area2D y tendrá un nodo Sprite y un nodo CollissionShape2D de hijos.
 
 [//]: < (TODO: Añadir imagen)
+
+Como con el personaje, vamos a añadirle un script a la bala. De momento solo vamos a hacer que se mueva.
+
+```
+extends Area2D
+
+const SPEED = 500 # Píxeles / segundo.
+
+var move_dir = Vector2.RIGHT
+
+
+func _ready() -> void:
+    # Calcular la dirección de movimiento en función de la rotación.
+    move_dir = Vector2(cos(rotation), sin(rotation))
+
+
+func _physics_process(delta: float) -> void:
+    # Mover la bala.
+    position += move_dir * SPEED * delta
+```
+
+¿Por qué no usar el método `move_and_slide()` como con el personaje? Porque ese es un método para los nodos `KinematicBody2D` que no sirve para nuestro nodo `Area2D`, así que vamos a modificar directamente el valor de la variable `position`.
+
+#### Optimización
+
+Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
+
+
+[//]: < (TODO: Añadir imagen)
+
+Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de nodo son muy útiles cuando queremos monitorizar si una instancia de un objeto sale o entra en pantalla. Vamos a aprovecharnos de la señal `screen_exited`, la cual es emitida cuando el nodo sale de la pantalla. Conectamos la señal a un nuevo método.
+
+[//]: < (TODO: Añadir imágenes de cómo conectar la señal.)
+
+Y rellenamos el cuerpo del método con la función `queue_free()`, la cual elimina un nodo de la escena.
+
+```
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+    # La bala se ha salido de la pantalla. 
+    queue_free() # Borrar esta instancia.
+```
