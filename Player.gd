@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 const SPEED = 200
+# Cargar la escena de la bala.
 const BULLET = preload("res://Bullet.tscn")
 
 # Declare member variables here. Examples:
@@ -35,11 +36,14 @@ func _physics_process(delta: float):
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("shoot"):
-		shoot()
+		shoot() # Disparar.
 
 
 func shoot():
-	var bullet = BULLET.instance()
+	# Crear nueva instancia.
+	var bullet = BULLET.instance() 
+	# Dar propiedades a la nueva instancia de la bala.
 	bullet.rotation = rotation
 	bullet.position = position
+	# Añadir la bala como hijo del nodo padre.
 	get_parent().add_child(bullet)

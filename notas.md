@@ -18,7 +18,7 @@ Bajo Display -> Window:
     + Aspect: Keep
 ## Orientación a objetos
 
-# Programar el juego
+# Programando el juego
 
 ## Crear Jugador
 ### Nodos
@@ -33,7 +33,7 @@ func _physics_process(delta: float):
     rotation = get_local_mouse_position().angle()
 ```
 
-Si ejecutamos el juego nos encontramos con nuestro primer bug. El jugador está rotando continuamente. Resulta que al rotar el jugador rotamos también el los ejes de coordenadas locales, y por lo tanto, las coordenadas locales del cursor son distintas.
+Si ejecutamos la escena (F6 o Reproducir Escena arriba a la derecha) nos encontramos con nuestro primer *bug*. El personaje no apunta hacia el ratón como teníamos planeado. Resulta que al rotarlo estamos rotando también los ejes de coordenadas locales, y por lo tanto, las coordenadas locales del cursor son distintas en cada fotograma.
 
 Para evitar esto podemos usar las coordenadas globales.
 
@@ -41,6 +41,14 @@ Para evitar esto podemos usar las coordenadas globales.
 func _physics_process(delta: float):
     rotation = global_position.direction_to(get_global_mouse_position()).angle()
 ```
+
+#### Escena principal
+
+Hay prepararlo todo para ejecutar el juego por primera vez. Vamos a crear una nueva escena, yo le suelo dar de nombre `Main.tscn` o `Game.tscn`. El nodo raíz va a ser de tipo `Node`. De momento vamos a darle un nodo hijo de tipo `Node2D` y lo llamaremos *World*. Como hijo de *World* podemos poner la escena de nuestro jugador, arrastrando `Player.tscn` hacia el nodo *World*. Podéis mover al personaje por el escenario para que no se quede en la esquina.
+
+[//]: < (TODO: Añadir imagen)
+
+Ya tenemos la escena principal preparada. Vamos a ejecutarla pulsando F5 o el botón de Reproducir arriba a la derecha. La primera vez nos pedirá establecer una escena principal, elegiremos la que acabamos de crear.
 
 #### Acciones
 
@@ -111,10 +119,37 @@ func _physics_process(delta: float) -> void:
 
 ¿Por qué no usar el método `move_and_slide()` como con el personaje? Porque ese es un método para los nodos `KinematicBody2D` que no sirve para nuestro nodo `Area2D`, así que vamos a modificar directamente el valor de la variable `position`.
 
+Ahora que le hemos añadido lógica a la bala, toca hacer que el personaje dispara al hacer click. Esto, en otras palabras, sería crear una *instancia* de la escena `Bullet.tscn`. Para ello vamos volvemos al script del jugador. Godot nos proporciona unos métodos muy util para manejar los inputs, `_input(event)` y `_unhandeled_input(event)`. La diferencia entre ambos es un poco sutil, pero para esto nos viene mejor el segundo. Este método se llama cuando hay un evento de input que no ha sido tratado, y dentro del mismo podemos comprobar de qué evento se trata. En particular nos interesa un evento relacionado con la acción `shoot` (la cual hemos definido antes).
+
+```
+func _unhandled_input(event: InputEvent):
+    if event.is_action_pressed("shoot"):
+        shoot() # Disparar.
+```
+
+Ahora mismo nuestro código está incompleto. He hecho referencia a un método `shoot()` que no está definido. Lo tenemos que crear nosotros. Este método es el que va a instanciar la bala. En Godot esto se hace de una manera un poco peculiar y que asusta un poco al principio. Los pasos a seguir son crear una instancia de la escena `Bullet.tscn`, darle las propiedades que nos interesan y añadirlas a algún lugar de la escena principal. Para crear una instancia de una escena tendremos que cargar dicha escena anteriormente. Al final nos queda algo así:
+
+```
+# Cargar la escena de la bala.
+const BULLET = preload("res://Bullet.tscn")
+
+[...]
+
+func shoot():
+    # Crear nueva instancia.
+    var bullet = BULLET.instance() 
+    # Dar propiedades a la nueva instancia de la bala.
+    bullet.rotation = rotation
+    bullet.position = position
+    # Añadir la bala como hijo del nodo padre.
+    get_parent().add_child(bullet)
+```
+
+Todo esto ha sido mucho de golpe para una simple bala, ¿no? Ahora mismo ya debería estar todo. ¡Toca probar si funciona!
+
 #### Optimización
 
 Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
-
 
 [//]: < (TODO: Añadir imagen)
 
