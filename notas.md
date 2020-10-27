@@ -147,6 +147,46 @@ func shoot():
 
 Todo esto ha sido mucho de golpe para una simple bala, ¿no? Ahora mismo ya debería estar todo. ¡Toca probar si funciona!
 
+#### Enemigo
+
+Ahora que ya podemos movernos y disparar necesitamos algo de lo que huir y a lo que disparar. Vamos a hacer unos enemigos simples que sigan al jugador. Para ello creamos una nueva escena `Enemy.tscn` con los mismos nodos que en `Player.tscn` (raíz KinematicBody2D, hijos Sprite y CollisionShape2D) y le damos un nuevo script `Enemy.gd`. El código de los enemigos es bastante parecido a lo que ya hemos visto, solo que en este caso usaremos `move_and_collide()` para el movimiento.
+
+```
+extends KinematicBody2D
+
+const SPEED = 50 # Píxeles / segundo.
+
+var to_follow
+
+
+func _physics_process(delta: float) -> void:
+    if is_instance_valid(to_follow):
+        # Moverse hacia to_follow
+        var move_dir = global_position.direction_to(to_follow.global_position)
+        rotation = move_dir.angle()
+        move_and_collide(move_dir * SPEED * delta)
+```
+
+**Nota.-** *Observa que esta vez estamos usando `move_and_collide()`. Este método exige que el movimiento sea multiplicado por el parámetro delta a diferencia de `move_and_slide()`.*
+
+Si añadimos un enemigo a la escena principal veremos que no se mueve. Esto es porque la variable `to_follow` está sin inicializar, y por tanto el enemigo no tiene objetivo que seguir. Le daremos valor a esta variable desde un nuevo script en el nodo *World* de la escena principal, `World.gd`.
+
+```
+extends Node2D
+
+
+onready var _player = $Player
+onready var _enemy = $Enemy
+
+
+func _ready() -> void:
+    _enemy.to_follow = _player
+```
+
+Ahora el enemigo persigue al jugador, pero este no reacciona a las balas que le disparamos, y el jugador tampoco recibe daño si el enemigo choca con nosotros. Para ello tendremos que añadir nueva lógica a las balas, el personaje y el enemigo.
+
+[//]: < (TODO: Añadir tema colisiones y vida)
+
 #### Optimización
 
 Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.

@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
 
 [node name="World" type="Node2D" parent="."]
+script = ExtResource( 3 )
 
 [node name="Player" parent="World" instance=ExtResource( 1 )]
 position = Vector2( 200, 200 )
+
+[node name="Enemy" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 325.843, 156.975 )
