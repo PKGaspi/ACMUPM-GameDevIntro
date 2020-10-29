@@ -5,19 +5,11 @@ const SPEED = 200
 # Cargar la escena de la bala.
 const BULLET = preload("res://Bullet.tscn")
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
 
+var hp = 3
+# Para acceder al nodo InvencibilityTimer.
+onready var _invencibility_timer = $InvencibilityTimer
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float):
-#	pass
 
 
 func _physics_process(delta: float):
@@ -47,3 +39,19 @@ func shoot():
 	bullet.position = position
 	# Añadir la bala como hijo del nodo padre.
 	get_parent().add_child(bullet)
+
+
+func take_damage():
+	# Comprobar si la nave es invencible.
+	if _invencibility_timer.is_stopped():
+		# No es invencible, recibir daño.
+		hp -= 1
+		# Iniciar temporizador de invencibilidad.
+		_invencibility_timer.start()
+		# Comprobar si me muero.
+		if hp <= 0:
+			die() # Me muero.
+
+
+func die():
+	queue_free() # Borrar de la escena principal.

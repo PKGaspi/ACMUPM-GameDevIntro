@@ -1,10 +1,11 @@
 
 # Introducción
 
-## Introducir Godot
-## Descargar Godot
-## Crear Proyecto
-## Interfaz de Godot
+## Godot
+Godot es un motor de videojuegos gratuito, multiplataforma y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre godot y descargarlo desde su página web: godotengine.org
+
+### Crear Proyecto
+### Interfaz
 ### Importar assets
 Opciones de importado (desactivar filtrado bilineal)
 ### Ajustes de proyecto
@@ -16,15 +17,13 @@ Bajo Display -> Window:
 - Stretch
     + Mode: 2D
     + Aspect: Keep
-## Orientación a objetos
+
+## Programación Orientada a Objetos
 
 # Programando el juego
 
-## Crear Jugador
-### Nodos
-### Script
-#### Introducción básica a GDScript
-#### Rotación
+## Introducción básica a GDScript
+## Rotación
 
 Empezaremos por algo básico. Vamos a hacer que nuestro jugador esté siempre apuntando hacia el cursor.
 
@@ -42,7 +41,7 @@ func _physics_process(delta: float):
     rotation = global_position.direction_to(get_global_mouse_position()).angle()
 ```
 
-#### Escena principal
+## Escena principal
 
 Hay prepararlo todo para ejecutar el juego por primera vez. Vamos a crear una nueva escena, yo le suelo dar de nombre `Main.tscn` o `Game.tscn`. El nodo raíz va a ser de tipo `Node`. De momento vamos a darle un nodo hijo de tipo `Node2D` y lo llamaremos *World*. Como hijo de *World* podemos poner la escena de nuestro jugador, arrastrando `Player.tscn` hacia el nodo *World*. Podéis mover al personaje por el escenario para que no se quede en la esquina.
 
@@ -50,15 +49,15 @@ Hay prepararlo todo para ejecutar el juego por primera vez. Vamos a crear una nu
 
 Ya tenemos la escena principal preparada. Vamos a ejecutarla pulsando F5 o el botón de Reproducir arriba a la derecha. La primera vez nos pedirá establecer una escena principal, elegiremos la que acabamos de crear.
 
-#### Acciones
+## Acciones
 
 Primero vamos a echar un vistazo al Mapa de Entrada (Proyecto -> Ajustes del Proyecto -> Mapa de Entrada). Aquí podemos añadir acciones y asociarles eventos. Vamos a añadir cinco eventos, cuatro para movimiento y otro para disparar.
 
-[//]: < (TODO: Añadir imágenes)
+[//]: <> (TODO: Añadir imágenes)
 
 **Nota.-** *Para añadir una acción, escribe el nombre de la acción en el campo de arriba y dale al botón de Añadir de la derecha. Para añadir eventos a una acción, busca la acción y pulsa el botón "+" que tiene a la derecha.*
 
-#### Movimiento
+## Movimiento
 
 Ahora volvamos al script de nuestro personaje. Vamos a calcular la dirección en la que el jugador quiere mover a su personaje. Para ello usaremos la clase Input. Esta clase nos facilita el método `get_action_strength(action)`, el cual nos devuelve un valor entre 0 y 1 según si algún evento está activando la acción `action` o no. En otras palabras, `get_action_strength("move_left")` devolverá 1 si el jugador está pulsando la tecla A o la flecha izquierda y 0 en otro caso.
 
@@ -91,11 +90,11 @@ func _physics_process(delta: float):
     move_and_slide(input_dir * SPEED)
 ```
 
-#### Disparo
+## Disparo
 
 Antes de plantearnos cómo disparar... Necesitaremos algo que disparar, ¿no? Vamos a crear una escena para representar una bala. La raíz será un nodo Area2D y tendrá un nodo Sprite y un nodo CollissionShape2D de hijos.
 
-[//]: < (TODO: Añadir imagen)
+[//]: <> (TODO: Añadir imagen)
 
 Como con el personaje, vamos a añadirle un script a la bala. De momento solo vamos a hacer que se mueva.
 
@@ -147,7 +146,7 @@ func shoot():
 
 Todo esto ha sido mucho de golpe para una simple bala, ¿no? Ahora mismo ya debería estar todo. ¡Toca probar si funciona!
 
-#### Enemigo
+## Enemigo
 
 Ahora que ya podemos movernos y disparar necesitamos algo de lo que huir y a lo que disparar. Vamos a hacer unos enemigos simples que sigan al jugador. Para ello creamos una nueva escena `Enemy.tscn` con los mismos nodos que en `Player.tscn` (raíz KinematicBody2D, hijos Sprite y CollisionShape2D) y le damos un nuevo script `Enemy.gd`. El código de los enemigos es bastante parecido a lo que ya hemos visto, solo que en este caso usaremos `move_and_collide()` para el movimiento.
 
@@ -185,17 +184,99 @@ func _ready() -> void:
 
 Ahora el enemigo persigue al jugador, pero este no reacciona a las balas que le disparamos, y el jugador tampoco recibe daño si el enemigo choca con nosotros. Para ello tendremos que añadir nueva lógica a las balas, el personaje y el enemigo.
 
-[//]: < (TODO: Añadir tema colisiones y vida)
+## Colisiones
 
-#### Optimización
+Godot ya nos ofrece un sistema de colisiones muy robusto. Como hemos podido probar, el enemigo se detiene al chocar con el personaje del jugador y viceversa. Sin embargo, sería lógico que el jugador recibiera daño al chocar con un enemigo. Vamos a ver cómo podemos detectar estos casos.
+
+Vamos a empezar añadiendo una variable `hp` (que significa *hit points*) para controlar cuánta vida le queda a nuestro jugador o enemigo. También añadiremos unas funciones muy simples para recibir daño y morir. Tanto en `Player.gd` como en `Enemy.gd`:
+
+```
+var hp = 3
+
+[...]
+
+func take_damage():
+    hp -= 1
+    # Comprobar si me muero.
+    if hp <= 0:
+        die() # Me muero.
+
+
+func die():
+    queue_free() # Borrar de la escena principal.
+```
+
+Al jugador he decidido darle 3 puntos de vida y al enemigo tan solo 1. Ahora, cuando ocurra una colisión con una bala o con un enemigo, tendremos que llamar a la función `take_damage()` de la instancia que debería recibir daño.
+
+Primero vamos con la bala. Los nodos de tipo `Area2D` tienen varias señales que emiten en función de si un cuerpo o área entra en su porpia área, es decir, si colisionan con algo. En este caso nos interesa la señal `body_entered`, que se emite cuando un cuerpo (como un `KinematicBody2D`) entra en contacto con el `Area2D`. Vamos a conectar dicha señal a un nuevo método:
+
+```
+func _on_Bullet_body_entered(body: Node) -> void:
+    if body.has_method("take_damage"):
+        body.take_damage()
+        queue_free()
+```
+
+Si probamos el juego ahora mismo y disparamos veremos que las balas no aparecen... Es más, cuando disparamos una tercera bala nuestra nave desaparece. ¿Qué ocurre? Parece ser que hemos introducido un nuevo *bug* en el código. La bala no ignora la colisión con nuestra nave, por lo que nos estamos haciendo daño a nosotros mismos.
+
+Para tratar esto, Godot tiene un sistema de capas y máscaras de colisión. Vamos a crear 3 capas de colisión: *player*, *enemy* y *player_bullet*. Solo con crear las capas no basta, hay que añadir nuestros nodos a las capas a las que nos interesa, y también indicarles con qué capas deben colisionar.
+
+[//]: <> (TODO: Añadir imágenes de crear capas de colisión y bits.)
+
+Con esto ya debería funcionar todo como esperábamos. Las balas no colisionan con nuestra nave, pero sí con la enemiga.
+
+Por último, vamos a hacer que el enemigo haga daño a nuestra nave al chocar con nosotros. Podemos obtener información de la colisión al mover un cuerpo con el valor que devuelve `move_and_collide()`. Vamos a cambiar un poco el código del enemigo:
+
+```
+func _physics_process(delta: float) -> void:
+
+    [...]
+
+        var collision = move_and_collide(move_dir * SPEED * delta)
+        if collision and to_follow.has_method("take_damage") and collision.collider == to_follow:
+            to_follow.take_damage()
+```
+
+El código tiene sentido... ¿No? Sin embargo, al probarlo parece que nuestra nave muere de un solo golpe. ¿Qué está pasando? Como hemos visto al principio, el método `_physics_process(delta)` se ejecuta en cada fotograma en el que se deban procesar las físicas. Esto es, por defecto, 60 fotogramas cada segundo. Como nuestra nave solo tiene 3 puntos de vida, esta muere en tan solo 3 fotogramas. Tenemos que añadir un temporizador que evite recibir daño de forma tan seguida. Esto, en el mundo del desarrollo de videojuegos, se conoce como *frames de invencibilidad* o *iframes*. 
+
+Para implementar esto vamos a añadirle a la nave del jugador un nodo de tipo `Timer`. La función de este nodo es muy sencilla, llevar cuenta de un temporizador. Le podemos poner estos parámetros.
+
+[//]: <> (TODO: Añadir imagen del nodo Timer)
+
+- `wait_time`: el tiempo del temporizador. Cuando llegue a 0 emitirá la señál `timeout`.
+- `one_shot`: indica si queremos que el temporizador se quede parado al llegar a 0 (*True*) o si queremos que vuelva a contar desde `wait_time` (*False*). 
+- `autostart`: si está a *True* el temporizador empezará a contar cuando el nodo entre en la escena. Si está a *False* solo lo hará al llamar al método `start()`.
+
+Ahora que tenemos el temporizador tenemos que añadir la lógica al código.
+
+```
+# Para acceder al nodo InvencibilityTimer.
+onready var _invencibility_timer = $InvencibilityTimer
+
+func take_damage():
+    # Comprobar si la nave es invencible.
+    if _invencibility_timer.is_stopped():
+        # No es invencible, recibir daño.
+        hp -= 1
+        # Iniciar temporizador de invencibilidad.
+        _invencibility_timer.start()
+        # Comprobar si me muero.
+        if hp <= 0:
+            die() # Me muero.
+```
+
+
+Ahora sí, la nave aguanta bastante más de 3 fotogramas.
+
+## Optimización
 
 Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
 
-[//]: < (TODO: Añadir imagen)
+[//]: <> (TODO: Añadir imagen)
 
 Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de nodo son muy útiles cuando queremos monitorizar si una instancia de un objeto sale o entra en pantalla. Vamos a aprovecharnos de la señal `screen_exited`, la cual es emitida cuando el nodo sale de la pantalla. Conectamos la señal a un nuevo método.
 
-[//]: < (TODO: Añadir imágenes de cómo conectar la señal.)
+[//]: <> (TODO: Añadir imágenes de cómo conectar la señal.)
 
 Y rellenamos el cuerpo del método con la función `queue_free()`, la cual elimina un nodo de la escena.
 

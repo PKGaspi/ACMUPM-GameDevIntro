@@ -17,3 +17,9 @@ func _physics_process(delta: float) -> void:
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	# La bala se ha salido de la pantalla. 
 	queue_free() # Borrar esta instancia.
+
+
+func _on_Bullet_body_entered(body: Node) -> void:
+	if body.has_method("take_damage"):
+		body.take_damage()
+		queue_free()
