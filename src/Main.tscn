@@ -1,26 +1,27 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World.gd" type="Script" id=3]
-[ext_resource path="res://HPBar.gd" type="Script" id=4]
-[ext_resource path="res://Main.gd" type="Script" id=5]
+[ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/World.gd" type="Script" id=2]
+[ext_resource path="res://src/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/HPBar.gd" type="Script" id=4]
+[ext_resource path="res://src/Main.gd" type="Script" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
 
 [node name="World" type="Node2D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="Player" parent="World" instance=ExtResource( 1 )]
 position = Vector2( 200, 200 )
 
-[node name="Enemy" parent="World" instance=ExtResource( 2 )]
+[node name="Enemy" parent="World" instance=ExtResource( 3 )]
 position = Vector2( 325.843, 156.975 )
 
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -28,6 +29,7 @@ __meta__ = {
 [node name="HPBar" type="ProgressBar" parent="UI"]
 margin_right = 74.0
 margin_bottom = 14.0
+mouse_filter = 2
 max_value = 3.0
 step = 1.0
 value = 3.0

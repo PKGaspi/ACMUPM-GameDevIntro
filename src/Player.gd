@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 const SPEED = 200
 # Cargar la escena de la bala.
-const BULLET = preload("res://Bullet.tscn")
+const BULLET = preload("res://src/Bullet.tscn")
 
 
 var hp = 3
