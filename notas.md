@@ -24,6 +24,7 @@ Bajo Display -> Window:
 
 ## Introducción básica a GDScript
 ## Rotación
+[//]: < (TODO: Juntar todo lo básico del jugador en una sección)
 
 Empezaremos por algo básico. Vamos a hacer que nuestro jugador esté siempre apuntando hacia el cursor.
 
@@ -41,7 +42,8 @@ func _physics_process(delta: float):
     rotation = global_position.direction_to(get_global_mouse_position()).angle()
 ```
 
-## Escena principal
+## Escena principal 
+[//]: < (TODO: Mover esto a lo primero)
 
 Hay prepararlo todo para ejecutar el juego por primera vez. Vamos a crear una nueva escena, yo le suelo dar de nombre `Main.tscn` o `Game.tscn`. El nodo raíz va a ser de tipo `Node`. De momento vamos a darle un nodo hijo de tipo `Node2D` y lo llamaremos *World*. Como hijo de *World* podemos poner la escena de nuestro jugador, arrastrando `Player.tscn` hacia el nodo *World*. Podéis mover al personaje por el escenario para que no se quede en la esquina.
 
@@ -145,6 +147,24 @@ func shoot():
 ```
 
 Todo esto ha sido mucho de golpe para una simple bala, ¿no? Ahora mismo ya debería estar todo. ¡Toca probar si funciona!
+
+### Optimización
+
+Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
+
+[//]: <> (TODO: Añadir imagen)
+
+Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de nodo son muy útiles cuando queremos monitorizar si una instancia de un objeto sale o entra en pantalla. Vamos a aprovecharnos de la señal `screen_exited`, la cual es emitida cuando el nodo sale de la pantalla. Conectamos la señal a un nuevo método.
+
+[//]: <> (TODO: Añadir imágenes de cómo conectar la señal.)
+
+Y rellenamos el cuerpo del método con la función `queue_free()`, la cual elimina un nodo de la escena.
+
+```
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+    # La bala se ha salido de la pantalla. 
+    queue_free() # Borrar esta instancia.
+```
 
 ## Enemigo
 
@@ -268,20 +288,39 @@ func take_damage():
 
 Ahora sí, la nave aguanta bastante más de 3 fotogramas.
 
-## Optimización
+## Interfaz
 
-Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
+El jugador debería poder ver en todo momento cuánta vida le queda a su nave. Vamos a hacer una interfaz sencilla que haga el trabajo. Godot tiene una serie de nodos diseñados justo para esto, los nodos que heredan de `Control` (los verdes). Vamos a añadir nuevos nodos a nuestra escena principal. Un nodo `Control` llamado *UI* y un nodo `ProgressBar` llamado *HPBar*.
 
-[//]: <> (TODO: Añadir imagen)
+[//]: <> (TODO: Añadir imagen de los nuevos nodos)
 
-Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de nodo son muy útiles cuando queremos monitorizar si una instancia de un objeto sale o entra en pantalla. Vamos a aprovecharnos de la señal `screen_exited`, la cual es emitida cuando el nodo sale de la pantalla. Conectamos la señal a un nuevo método.
+Estos nodos tienen mogollón de variables de configuración, pero de momento vamos a ignorar la gran mayoría. Vamos a seleccionar el nodo *UI*. En la parte superior aparece un botón que dice *Layout*. Lo pulsamod para desplegar un menú y elegimos *Completo* para que el nodo ocupe toda la parte visible de la escena.  Ajustamos también el tamaño de *HPBar* para que sea bien visible y le damos los siguientes valores.
 
-[//]: <> (TODO: Añadir imágenes de cómo conectar la señal.)
+[//]: <> (TODO: Añadir imagen de los valores de HPBar)
 
-Y rellenamos el cuerpo del método con la función `queue_free()`, la cual elimina un nodo de la escena.
+Además, vamos a darle un script a *HPBar* para que monitorize la variable `hp` del nodo que le digamos. En `HPBar.gd`:
 
 ```
-func _on_VisibilityNotifier2D_screen_exited() -> void:
-    # La bala se ha salido de la pantalla. 
-    queue_free() # Borrar esta instancia.
+extends ProgressBar
+
+
+var to_monitor
+
+func _process(delta):
+    if is_instance_valid(to_monitor):
+        value = to_monitor.hp
+    else:
+        value = 0
+```
+
+Por último, tenemos que darle valor a la variable `to_monitor`. Esto lo haremos desde el nodo *Main*, la raíz de la escena principal. Le damos script a este nodo (`Main.gd`) y añadimos lo siguiente:
+
+```
+extends Node
+
+onready var _player = $World/Player
+onready var _hp_bar = $UI/HPBar
+
+func _ready() -> void:
+    _hp_bar.to_monitor = _player
 ```
