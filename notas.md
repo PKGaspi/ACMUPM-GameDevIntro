@@ -132,7 +132,7 @@ Ahora mismo nuestro código está incompleto. He hecho referencia a un método `
 
 ```
 # Cargar la escena de la bala.
-const BULLET = preload("res://Bullet.tscn")
+const BULLET = preload("res://src/Bullet.tscn")
 
 [...]
 
@@ -324,3 +324,33 @@ onready var _hp_bar = $UI/HPBar
 func _ready() -> void:
     _hp_bar.to_monitor = _player
 ```
+
+# Conclusiones
+
+# Para continuar
+
+Te reto a continuar con el desarrollo de este juego. Aquí tienes una lista de ideas que implementar, aunque puedes añadir y cambiar todo lo que quieras. 
+
+- **Fondo**: Buscar un *background* molón y ponerlo de fondo. Es importante que no distraiga mucho y que aún así se puedan ver las balas y los personajes con claridad.
+- **Salir del juego**: Hacer una forma sencilla de cerrar el juego. Por ejemplo, manteniendo pulsada la tecla *Esc* durante un segundo.
+- **Puntuación**: Dar puntos al jugador al matar a un enemigo. Mostrar los puntos en la interfaz del juego.
+- **Sonidos al disparar**: Echa un vistazo a [Audio streams](https://docs.godotengine.org/en/stable/tutorials/audio/audio_streams.html), en particular al nodo `AudioStreamPlayer2D`. Para hacer sonidos de forma rápida puedes utilizar [bfxr](https://www.bfxr.net/).
+- **Fuego rápido**: Disparar un chorro de balas al mantener pulsado el botón de disparo, en lugar de disparar una bala por click. Limitar el número de balas por segundo que se disparan.
+- **Pantalla de título y de *Game Over***: Puedes utilizar nodos `Control` para mostrar mensajes de manera sencilla.
+- **Balas enemigas**: Hacer que los enemigos disparen al personaje del jugador cada cierto tiempo.
+- **Animación de morir**: Al morir una nave molaría que generara una explosión. Puedes probar con unas cuantas [partículas](https://docs.godotengine.org/en/stable/classes/class_particles2d.html#class-particles2d). Ah, también debería hacer algún ruido.
+- **Aparición de enemigos**: Poner todos los enemigos de uno en uno no es efectivo. Hay que hacer que aparezcan más enemigos de forma automática al matar los que ya hay. Se puede hacer de forma parecida a como creamos las balas.
+
+
+
+Están ordenados (más o menos) por orden de dificultad. No te preocupes si no puedes con alguno de ellos. Para cualquier cosa, al final de estas notas están mis redes y métodos de contacto. ¡Estaré encantado de ayudaros y ver vuestros resultados!
+
+# Contacto
+Si todavía no estás apuntado a ACM, ¿a qué esperas? Es gratis y hacemos cosas de este tipo a menudo. Te recomendamos echarle un vistazo a los siguientes enlaces:
+
+- Página Web: https://upm.acm.org/
+- Telegram de GameDev: https://t.me/joinchat/GXu1OFCoE3drXGvjxQlfKg
+
+Si después del taller te quedas con alguna duda, me la puedes preguntar por:
+- Twitter: [@_Gaspi](https://twitter.com/_gaspi)
+- Telegram: [@PK_Gaspi](https://t.me/PK_Gaspi)
