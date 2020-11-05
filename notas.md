@@ -47,7 +47,7 @@ Bajo Display -> Window:
 
 ## Introducción básica a GDScript
 ## Rotación
-[//]: < (TODO: Juntar todo lo básico del jugador en una sección)
+[//]: <> (TODO: Juntar todo lo básico del jugador en una sección)
 
 Empezaremos por algo básico. Vamos a hacer que nuestro jugador esté siempre apuntando hacia el cursor.
 
@@ -66,11 +66,11 @@ func _physics_process(delta: float):
 ```
 
 ## Escena principal 
-[//]: < (TODO: Mover esto a lo primero)
+[//]: <> (TODO: Mover esto a lo primero)
 
 Hay prepararlo todo para ejecutar el juego por primera vez. Vamos a crear una nueva escena, yo le suelo dar de nombre `Main.tscn` o `Game.tscn`. El nodo raíz va a ser de tipo `Node`. De momento vamos a darle un nodo hijo de tipo `Node2D` y lo llamaremos *World*. Como hijo de *World* podemos poner la escena de nuestro jugador, arrastrando `Player.tscn` hacia el nodo *World*. Podéis mover al personaje por el escenario para que no se quede en la esquina.
 
-[//]: < (TODO: Añadir imagen)
+[//]: <> (TODO: Añadir imagen)
 
 Ya tenemos la escena principal preparada. Vamos a ejecutarla pulsando F5 o el botón de Reproducir arriba a la derecha. La primera vez nos pedirá establecer una escena principal, elegiremos la que acabamos de crear.
 
