@@ -23,7 +23,9 @@ Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí 
 Además, algunos de los paneles tienen varias pestañas. En el panel amarillo 3 vemos también la pestaña Importación y en el morado 4 la pestaña Nodos. Las explicaré conforme las vayamos usando.
 
 ### Importar assets
-Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí]().
+Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/tree/master/assets).
+
+**Nota.-** *Con los ficheros `.png` es suficiente.*
 
 Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puedes hacerlo mediante tu explorador de archivos o arrastrarlos al panel de Godot. A mí me gusta guardarlos bajo la carpeta `assets/`, separando luego sprites de sonidos y música.
 
