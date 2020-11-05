@@ -13,7 +13,7 @@ Vamos a crear un proyecto desde cero. Al pulsar el botón nos pide indicar la ru
 ### Interfaz
 Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí es donde se cocina la magia. Podemos distinguir cuatro paneles.
 
-![primera vista de godot](.notas/001.png)
+![primera vista de godot](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/001.png?raw=true)
 
 1.- Vista principal: aquí podremos ver nuestra escena y nuestro código. Más adelante vemos lo que es una escena.
 2.- Explorador de archivos: un navegador simple que muestra los archivos de nuestro proyecto.
@@ -29,7 +29,7 @@ Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puede
 
 Por último, conviene comprobar las opciones de importación seleccionando un sprite en el explorador de archivos y cambiando a la pestaña Importación del panel amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
 
-![opciones de importación](.notas/002.png)
+![opciones de importación](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/002.png?raw=true)
 
 ### Ajustes de proyecto
 Vamos a cambiar algunos ajustes (Proyecto -> Ajustes de Proyecto).
