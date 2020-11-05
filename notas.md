@@ -1,13 +1,36 @@
-
 # Introducción
 
 ## Godot
-Godot es un motor de videojuegos gratuito, multiplataforma y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre godot y descargarlo desde su página web: godotengine.org
+Godot es un motor de videojuegos gratuito, multiplataforma y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre godot y descargarlo desde su página web: godotengine.org.
+
+Antes de empezar con nuextro juego vamos a ver unos conceptos básicos sobre Godot.
 
 ### Crear Proyecto
+Nada más iniciar Godot nos aparece una pantalla de bienvenida con nuestros proyectos más recientes. En el panel de la derecha podemos buscar proyectos existentes o crear uno nuevo. 
+
+Vamos a crear un proyecto desde cero. Al pulsar el botón nos pide indicar la ruta donde guardar el proyecto y qué motor de renderizado queremos usar. Elige la ruta que quieras y en el renderizador deja marcado OpenGL ES 3.0.
+
 ### Interfaz
+Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí es donde se cocina la magia. Podemos distinguir cuatro paneles.
+
+![primera vista de godot](.notas/001.png)
+
+1.- Vista principal: aquí podremos ver nuestra escena y nuestro código. Más adelante vemos lo que es una escena.
+2.- Explorador de archivos: un navegador simple que muestra los archivos de nuestro proyecto.
+3.- Árbol de la escena: los nodos que pertenecen a cada escena aparecerán aquí. De nuevo, más sobre nodos y escenas más adelante.
+4.- Inspector: ver y editar información sobre el nodo o recurso seleccionado.
+
+Además, algunos de los paneles tienen varias pestañas. En el panel amarillo 3 vemos también la pestaña Importación y en el morado 4 la pestaña Nodos. Las explicaré conforme las vayamos usando.
+
 ### Importar assets
-Opciones de importado (desactivar filtrado bilineal)
+Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí]().
+
+Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puedes hacerlo mediante tu explorador de archivos o arrastrarlos al panel de Godot. A mí me gusta guardarlos bajo la carpeta `assets/`, separando luego sprites de sonidos y música.
+
+Por último, conviene comprobar las opciones de importación seleccionando un sprite en el explorador de archivos y cambiando a la pestaña Importación del panel amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
+
+![opciones de importación](.notas/002.png)
+
 ### Ajustes de proyecto
 Vamos a cambiar algunos ajustes (Proyecto -> Ajustes de Proyecto).
 Bajo Display -> Window:
@@ -18,7 +41,7 @@ Bajo Display -> Window:
     + Mode: 2D
     + Aspect: Keep
 
-## Programación Orientada a Objetos
+### Nodos, Escenas y Programación Orientada a Objetos
 
 # Programando el juego
 
@@ -325,7 +348,18 @@ func _ready() -> void:
     _hp_bar.to_monitor = _player
 ```
 
-# Conclusiones
+# Conclusión
+
+Ahora mismo no tenemos un juego terminado, pulido y que podamos encontrar a la venta. Este no era el objetivo de este taller, sino tener algo jugable hecho por uno mismo.
+
+Después de lo anterior, deberías saber:
+
+- Los conceptos básicos del desarrollo y la programación de videojuegos.
+- Crear escenas y nodos en *Godot*.
+- Programar utilizando *GDScript*.
+- La diferencia entre un objeto y una instancia.
+- Pensar en la lógica necesaria para un videojuego e implementarla.
+- Cómo identificar y solucionar bugs.
 
 # Para continuar
 
@@ -340,8 +374,6 @@ Te reto a continuar con el desarrollo de este juego. Aquí tienes una lista de i
 - **Balas enemigas**: Hacer que los enemigos disparen al personaje del jugador cada cierto tiempo.
 - **Animación de morir**: Al morir una nave molaría que generara una explosión. Puedes probar con unas cuantas [partículas](https://docs.godotengine.org/en/stable/classes/class_particles2d.html#class-particles2d). Ah, también debería hacer algún ruido.
 - **Aparición de enemigos**: Poner todos los enemigos de uno en uno no es efectivo. Hay que hacer que aparezcan más enemigos de forma automática al matar los que ya hay. Se puede hacer de forma parecida a como creamos las balas.
-
-
 
 Están ordenados (más o menos) por orden de dificultad. No te preocupes si no puedes con alguno de ellos. Para cualquier cosa, al final de estas notas están mis redes y métodos de contacto. ¡Estaré encantado de ayudaros y ver vuestros resultados!
 
