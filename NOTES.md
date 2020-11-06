@@ -1,7 +1,7 @@
 # Introducción
 
 ## Godot
-Godot es un motor de videojuegos gratuito, multiplataforma y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre godot y descargarlo desde su página web: godotengine.org.
+Godot es un motor de videojuegos gratuito, multiplataforma y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre godot y descargarlo desde su página web: godotengine.org. Si necesitas más información sobre algo en particular, puedes echarle un ojo a su [documentación](https://docs.godotengine.org/es/stable/) (aunque lanzarme una pregunta o una búsqueda en Google igual te lo soluciona antes).
 
 Antes de empezar con nuextro juego vamos a ver unos conceptos básicos sobre Godot.
 
@@ -13,7 +13,7 @@ Vamos a crear un proyecto desde cero. Al pulsar el botón nos pide indicar la ru
 ### Interfaz
 Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí es donde se cocina la magia. Podemos distinguir cuatro paneles.
 
-![primera vista de godot](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/001.png?raw=true)
+![primer vistazo de godot](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/001.png?raw=true)
 
 1.- Vista principal: aquí podremos ver nuestra escena y nuestro código. Más adelante vemos lo que es una escena.
 2.- Explorador de archivos: un navegador simple que muestra los archivos de nuestro proyecto.
@@ -26,15 +26,16 @@ Además, algunos de los paneles tienen varias pestañas. En el panel amarillo 3 
 Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/tree/master/assets).
 
 **Nota.-** *Con los ficheros `.png` es suficiente.*
-
 Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puedes hacerlo mediante tu explorador de archivos o arrastrarlos al panel de Godot. A mí me gusta guardarlos bajo la carpeta `assets/`, separando luego sprites de sonidos y música.
 
-Por último, conviene comprobar las opciones de importación seleccionando un sprite en el explorador de archivos y cambiando a la pestaña Importación del panel amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
+Conviene comprobar las opciones de importación seleccionando un sprite en el explorador de archivos y cambiando a la pestaña Importación del panel amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
 
 ![opciones de importación](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/002.png?raw=true)
 
 ### Ajustes de proyecto
-Vamos a cambiar algunos ajustes (Proyecto -> Ajustes de Proyecto).
+Vamos a cambiar algunos ajustes del proyecto antes de empezar.
+
+Proyecto -> Ajustes de Proyecto
 Bajo Display -> Window:
 - Size
     + Width: 480
@@ -43,11 +44,53 @@ Bajo Display -> Window:
     + Mode: 2D
     + Aspect: Keep
 
-### Nodos, Escenas y Programación Orientada a Objetos
+### Nodos y Escenas
+Vamos a repasar un poco de programación orientada a objetos antes de ver lo que son los nodos y las escenas. A groso modo significa utilizar objetos como metáforas de los datos a representar en nuestro programa. Un objeto puede ser, por ejemplo, un coche. De un coche nos puede interesar guardar su marca, modelo, color, dueño, matrícula, etc. Una instancia de este objeto puede ser mi coche, con unos datos ya establecidos (Ford Fiesta rojo, matrícula 1234 BCD), el coche de mi heramana, el de mi vecino, etc.
+
+Después de esta mediocre explicación, podemos fácilmente asociar los objetos con los nodos de Godot. A fin de cuentas, un nodo es un objeto. Godot nos trae de fábrica varios nodos ya hechos, que nos facilitan tareas comunes en el desarrollo de videojuegos (como personajes que siguen físicas o interfaces).
+
+Una escena es, en su esencia, un conjunto de nodos en estructura de árbol. Los nodos en una escena se pueden comunicar entre sí.
+
+### GDScript
+GDScript es uno de los lenguajes en los que podemos programar en Godot. Está basado en Python, así que si alguna vez has usado este último te resultará muy familiar. Aquí os dejo una pequeña muestra de código para que os familiaricéis.
+```
+# Esta línea empieza por '#', así que es un comentario.
+
+# Hay que utilizar la palabra var para definir una función.
+# No hay que especificar tipo de función.
+var name = "Juan"
+var age = 21 * 365 * 24 * 60 * 60 # En segundos
+var smart = true
+
+
+# La palabra func sirve para definir una función o método.
+func my_func(arg0, arg1):
+    # Es obligatorio el indentado.
+    return arg0 + arg1
+
+
+# Este método se llama una vez cuando el nodo
+# entra en la escena principal.
+func _ready():
+    var number = my_func(age, 3)
+    # Imprimir en la consola
+    print("Hello world!")
+
+
+# Este método se llama en cada fotograma en el que se
+# procesen físicas (60 fps por defecto). El parámetro
+# delta es el tiempo que ha pasado entre esta llamada
+# y la anterior en segundos.
+func _physics_process(delta):
+    age += delta
+```
+Para más información y ejemplos de GDScript, consulta su página en la [documentación](https://docs.godotengine.org/es/stable/getting_started/scripting/gdscript/gdscript_basics.html).
+
 
 # Programando el juego
+Ahora ya sí que sí, vamos a ponernos a la obra. El juego que vamos a hacer es un shooter básico de vista aérea. Controlamos una nave espacial y varias naves enemigas tratan de eliminarnos.
 
-## Introducción básica a GDScript
+Podemos usar el pryecto que ya hemos creado para nuestro juego.
 ## Rotación
 [//]: <> (TODO: Juntar todo lo básico del jugador en una sección)
 
