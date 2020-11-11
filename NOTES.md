@@ -1,7 +1,10 @@
 # Introducción
+Bienvenido al taller de Introducción al desarrollo de videojuegos. Mi objetivo es que salgas de aquí con tu pequeño primer proyecto, el cual te servirá a aprender lo básico y despejarte de dudas.
+
+Estas notas nos guiarán por el taller. Si te pierdes, échales un vistazo. Si no te da tiempo a terminar hoy, deberías poder continuar siguiendo las notas. Si tienes alguna pregunta durante el taller, no dudes en pararme para preguntar. Si te surge la duda después de acabar, al final del todo puedes encontrar cómo contactar conmigo.
 
 ## Godot
-Godot es un motor de videojuegos gratuito, multiplataforma y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre Godot y descargarlo desde su página web: [godotengine.org](godotengine.org). Si necesitas más información sobre algo en particular, puedes echarle un ojo a su [documentación](https://docs.godotengine.org/es/stable/) (aunque lanzarme una pregunta o una búsqueda en Google igual te lo soluciona antes).
+Godot es un motor de videojuegos gratuito, multiplataforma, 3D/2D y de código abierto. Es lo que usaremos para hacer nuestro juego en este taller. Puedes aprender más sobre Godot y descargarlo desde su página web: [godotengine.org](godotengine.org). Si necesitas más información sobre algo en particular, puedes echarle un ojo a su [documentación](https://docs.godotengine.org/es/stable/) (aunque lanzarme una pregunta o una búsqueda en Google igual te lo soluciona antes).
 
 Antes de empezar con nuestro juego vamos a ver unos conceptos básicos sobre Godot.
 
