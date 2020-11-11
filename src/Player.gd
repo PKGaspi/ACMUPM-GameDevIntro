@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-const SPEED = 200
+const SPEED = 200 # Píxeles / segundo.
 # Cargar la escena de la bala.
 const BULLET = preload("res://src/Bullet.tscn")
 
@@ -12,7 +12,7 @@ onready var _invencibility_timer = $InvencibilityTimer
 
 
 
-func _physics_process(delta: float):
+func _physics_process(delta):
 	# Rotar el jugador para que mire al cursor.
 	rotation = global_position.direction_to(get_global_mouse_position()).angle()
 	
