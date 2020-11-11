@@ -448,8 +448,8 @@ Están ordenados (más o menos) por orden de dificultad. No te preocupes si no p
 # Contacto
 Si todavía no estás apuntado a ACM, ¿a qué esperas? Es gratis y hacemos cosas de este tipo a menudo. Te recomendamos echarle un vistazo a los siguientes enlaces:
 
-- Página Web: https://upm.acm.org/
-- Telegram de GameDev: https://t.me/joinchat/GXu1OFCoE3drXGvjxQlfKg
+- [Página Web](https://upm.acm.org/)
+- [Telegram de GameDev](https://t.me/joinchat/GXu1OFCoE3drXGvjxQlfKg)
 
 Si después del taller te quedas con alguna duda, me la puedes preguntar por:
 - Twitter: [@_Gaspi](https://twitter.com/_gaspi)
