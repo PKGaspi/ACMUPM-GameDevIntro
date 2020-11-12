@@ -1,5 +1,5 @@
 # Introducción
-Bienvenido al taller de Introducción al desarrollo de videojuegos. Mi objetivo es que salgas de aquí con tu pequeño primer proyecto, el cual te servirá a aprender lo básico y despejarte de dudas.
+Bienvenido al taller de Introducción al desarrollo de videojuegos. Mi objetivo es que salgas de aquí con tu pequeño primer proyecto, el cual te servirá para aprender lo básico y despejarte de dudas.
 
 Estas notas nos guiarán por el taller. Si te pierdes, échales un vistazo. Si no te da tiempo a terminar hoy, deberías poder continuar siguiendo las notas. Si tienes alguna pregunta durante el taller, no dudes en pararme para preguntar. Si te surge la duda después de acabar, al final del todo puedes encontrar cómo contactar conmigo.
 
@@ -18,29 +18,28 @@ Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí 
 
 ![primer vistazo de godot](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/001.png?raw=true)
 
-1.- Vista principal: aquí podremos ver nuestra escena y nuestro código. Más adelante vemos lo que es una escena.
-2.- Explorador de archivos: un navegador simple que muestra los archivos de nuestro proyecto.
-3.- Árbol de la escena: los nodos que pertenecen a cada escena aparecerán aquí. De nuevo, más sobre nodos y escenas más adelante.
-4.- Inspector: ver y editar información sobre el nodo o recurso seleccionado.
+1. **Vista principal**: aquí podremos ver nuestra escena y nuestro código. Más adelante vemos lo que es una escena.
+2. **Explorador de archivos**: un navegador simple que muestra los archivos de nuestro proyecto.
+3. **Árbol de la escena**: los nodos que pertenecen a cada escena aparecerán aquí. De nuevo, más sobre nodos y escenas más adelante.
+4. **Inspector**: ver y editar información sobre el nodo o recurso seleccionado.
 
-Además, algunos de los paneles tienen varias pestañas. En el panel amarillo 3 vemos también la pestaña Importación y en el morado 4 la pestaña Nodos. Las explicaré conforme las vayamos usando.
+Además, algunos de los paneles tienen varias pestañas. En el panel Amarillo 3 vemos también la pestaña Importación y en el Morado 4 la pestaña Nodos.
 
 ### Importar assets
-Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/tree/master/assets).
+Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/tree/master/assets/sprites).
 
 **Nota.-** *Con los ficheros `.png` es suficiente.*
 
-Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puedes hacerlo mediante tu explorador de archivos o arrastrarlos al panel de Godot. A mí me gusta guardarlos bajo la carpeta `assets/`, separando luego sprites de sonidos y música.
+Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puedes hacerlo mediante tu explorador de archivos o arrastrarlos al panel Verde 2 de Godot. A mí me gusta guardarlos bajo la carpeta `assets/`, separando luego sprites de sonidos y música.
 
-Conviene comprobar las opciones de importación seleccionando un sprite en el explorador de archivos y cambiando a la pestaña Importación del panel amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
+Conviene comprobar las opciones de importación. Selecciona un sprite en el explorador de archivos y cambia a la pestaña Importación del panel Amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar el filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
 
 ![opciones de importación](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/002.png?raw=true)
 
 ### Ajustes de proyecto
 Vamos a cambiar algunos ajustes del proyecto antes de empezar.
 
-Proyecto -> Ajustes de Proyecto
-Bajo Display -> Window:
+Proyecto -> Ajustes de Proyecto -> Window:
 - Size
     + Width: 480
     + Height: 270
@@ -51,17 +50,17 @@ Bajo Display -> Window:
 ### Nodos y Escenas
 Vamos a repasar un poco de programación orientada a objetos antes de ver lo que son los nodos y las escenas. A groso modo significa utilizar objetos como metáforas de los datos a representar en nuestro programa. Un objeto puede ser, por ejemplo, un coche. De un coche nos puede interesar guardar su marca, modelo, color, dueño, matrícula, etc. Una instancia de este objeto puede ser mi coche, con unos datos ya establecidos (Ford Fiesta rojo, matrícula 1234 BCD), el coche de mi hermana, el de mi vecino, etc.
 
-Después de esta mediocre explicación, podemos fácilmente asociar los objetos con los nodos de Godot. A fin de cuentas, un nodo es un objeto. Godot nos trae de fábrica varios nodos ya hechos, que nos facilitan tareas comunes en el desarrollo de videojuegos (como personajes que siguen físicas o interfaces).
+Después de esta mediocre explicación, podemos fácilmente asociar los objetos con los nodos de Godot. A fin de cuentas, un nodo es un objeto. Godot nos trae de fábrica varios nodos ya hechos, que nos facilitan tareas comunes en el desarrollo de videojuegos (como personajes que obedecen físicas o interfaces).
 
 Una escena es, en su esencia, un conjunto de nodos en estructura de árbol. Los nodos en una escena se pueden comunicar entre sí.
 
 ### GDScript
-GDScript es uno de los lenguajes en los que podemos programar en Godot. Está basado en Python, así que si alguna vez has usado este último te resultará muy familiar. Aquí os dejo una pequeña muestra de código para que os familiaricéis.
-```
+GDScript es uno de los lenguajes en los que podemos programar en Godot. Está basado en Python, así que puede que te resulte familiar. Aquí tienes una pequeña muestra de código para que te hagas a la idea.
+```GDScript
 # Esta línea empieza por '#', así que es un comentario.
 
-# Hay que utilizar la palabra var para definir una función.
-# No hay que especificar tipo de función.
+# Hay que utilizar la palabra var para definir una variable.
+# No hay que especificar el tipo de variable.
 var name = "Juan"
 var age = 21 * 365 * 24 * 60 * 60 # En segundos
 var smart = true
@@ -92,25 +91,24 @@ Para más información y ejemplos de GDScript, consulta su página en la [docume
 
 
 # Programando el juego
-Ahora ya sí que sí, vamos a ponernos a la obra. El juego que vamos a hacer es un shooter básico de vista aérea. Controlamos una nave espacial y varias naves enemigas tratan de eliminarnos.
+Ahora ya sí que sí, vamos a ponernos manos a la obra. El juego que vamos a hacer es un shooter básico de vista aérea. Controlamos una nave espacial y varias naves enemigas tratan de eliminarnos.
 
 Vamos a seguir a partir del proyecto que ya hemos creado.
 
-## Escenas *Main* y *Player*
+## Escenas *Player* y *Main*
 Vamos a empezar creando un par de escenas, *Player* y *Main*.
 
-En el panel del Árbol de la Escena (amarillo 3) podemos elegir el nodo raíz de la escena. Como nodo raíz vamos a elegir Otro Nodo, y dentro de este menú elegimos un nodo de tipo `KinematicBody2D`. Este tipo de nodo está pensado para seguir físicas, moverse y detectar colisiones. Vamos a darle un nodo hijo de tipo `Sprite` y otro de tipo `CollisionShape2D`. Configuramos estos dos últimos nodos en el panel Inspector (morado 4) con la textura de nuestra nave y una forma para la colisión. Para guardar la escena, pulsa ctrl + S. Te recomiendo guardarla con el nombre `Player.tscn` en una carpeta llamada `src`.
+En el panel del Árbol de la Escena (Amarillo 3) podemos elegir el nodo raíz de la escena. Como nodo raíz vamos a elegir Otro Nodo, y dentro de este menú elegimos un nodo de tipo `KinematicBody2D`. Este tipo de nodo está pensado para obedecer a físicas, moverse y detectar colisiones. Vamos a darle un nodo hijo de tipo `Sprite` y otro de tipo `CollisionShape2D`. Configuramos estos dos últimos nodos en el panel Inspector (Morado 4) con la textura de nuestra nave y una forma para la colisión. Para guardar la escena, pulsa Ctrl + S. Te recomiendo guardarla con el nombre `Player.tscn` en una carpeta llamada `src`.
 
 ![escena main](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/003.png?raw=true)
 
-Para la escena *Main* nos interesa un simple nodo raíz de tipo `Node` (Otro Nodo -> Node) y de nombre le pondremos *Game*. Como hijo tendrá un nodo de tipo `Node2D` llamado *World*. El nodo *World* tendrá como hijo la escena que hemos creado antes, `Player.tscn`. Recuerda guardar la escena al terminar.
+Para la escena *Main* nos interesa un simple nodo raíz de tipo `Node` (Otro Nodo -> Node) y de nombre le pondremos *Game*. Como hijo tendrá un nodo de tipo `Node2D` llamado *World*. El nodo *World* tendrá como hijo la escena que hemos creado antes, `Player.tscn`. Preuba a mover la escena de nuestra nave para que no se quede en una esquina. Recuerda guardar la escena al terminar.
 
 ![escena player](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/004.png?raw=true)
 
 Ahora, ¡podemos ejecutar nuestro juego por primera vez! Todavía no hemos hecho mucho, así que nada realmente emocionante va a pasar. Para hacerlo, pulsamos F5 o el botón de Reproducir arriba a la derecha. La primera vez nos pedirá establecer una escena principal, elegiremos la escena `Main.tscn`.
 
 ## Nave del jugador
-[//]: <> (TODO: Juntar todo lo básico del jugador en una sección)
 Nos preparamos para escribir nuestra primera pieza de código en el juego. Tranquilo que no va a ser muy duro. Volvemos a la escena `Player.tscn`, seleccionamos el nodo raíz y le damos al botón de añadir script. 
 
 ![añadir script](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/005.png?raw=true)
@@ -118,14 +116,14 @@ Nos preparamos para escribir nuestra primera pieza de código en el juego. Tranq
 Nos saldrá una ventana para configurar algunas cosas, pero está todo bien tal y como viene. Le damos a Cargar y se abrirá el nuevo script.
 
 Conviene tener una idea clara de lo que queremos que haga nuestra nave antes de meternos a programar a lo loco. Nuestra nave debería:
-1- Apuntar hacia el cursor en todo momento.
-2- Moverse cuando pulsemos las teclas WASD.
-3- Disparar al hacer click.
+1. **Apuntar** hacia el cursor en todo momento.
+2. **Moverse** cuando pulsemos las teclas WASD.
+3. **Disparar** al hacer click.
 
 ### Rotación
 Empezaremos por la más sencilla de la lista. Vamos a hacer que nuestra nave esté siempre apuntando hacia el cursor. Podemos controlar la rotación de nuestra nave cambiando el valor de la variable `rotation`. La posición del ratón la podemos obtener mediante `get_local_mouse_position()`, y el ángulo a esa posición con `angle()`.
 
-```
+```GDScript
 # Recordatorio: esta función se ejecuta en bucle 60 veces por segundo.
 func _physics_process(delta):
     rotation = get_local_mouse_position().angle()
@@ -135,7 +133,7 @@ Si ejecutamos el juego (F5 o Reproducir arriba a la derecha) nos vamos a encontr
 
 Para evitar esto podemos usar las coordenadas globales.
 
-``` 
+``` GDScript
 func _physics_process(delta):
     rotation = global_position.direction_to(get_global_mouse_position()).angle()
 ```
@@ -145,11 +143,11 @@ Primero vamos a echar un vistazo al Mapa de Entrada (Proyecto -> Ajustes del Pro
 
 ![mapa de entrada](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/006.png?raw=true)
 
-**Nota.-** *Para añadir una acción, escribe el nombre de la acción en el campo de arriba y dale al botón de Añadir de la derecha. Para añadir eventos a una acción, busca la acción y pulsa el botón "+" que tiene a la derecha.*
+**Para añadir una acción:** *escribe el nombre de la acción en el campo de arriba y dale al botón de Añadir de la derecha. Para añadir eventos a una acción, busca la acción y pulsa el botón "+" que tiene a la derecha.*
 
 Ahora volvamos al script de nuestro personaje. Vamos a calcular la dirección en la que el jugador quiere mover a su personaje. Para ello usaremos la clase `Input`. Esta clase nos facilita el método `get_action_strength(action)`, el cual nos devuelve un valor entre 0 y 1 según haya algún evento activando la acción `action` o no. En otras palabras, `get_action_strength("move_left")` devolverá 1 si el jugador está pulsando la tecla A o la flecha izquierda y 0 en otro caso.
 
-```
+```GDScript
 func _physics_process(delta):
 
     [...]
@@ -165,18 +163,19 @@ Hemos creado una variable `input_dir` que contiene un vector de 2 coordenadas (`
 - 1 si se está pulsando hacia la derecha.
 - -1 si se está pulsando hacia la izquierda.
 - 0 si no se pulsa nada o se pulsa hacia derecha e izquierda a la vez.
+
 El valor `y` se calcula con una resta semejante. Por último, normalizamos el vector (mediante `Vector2.normalized()`).
 
 
 Vamos a definir la velocidad a la que se moverá la nave. Como no tengo pensado dejar que este valor cambie, lo voy a guardar en una constante llamada `SPEED`.
 
-```
+```GDScript
 const SPEED = 200 # Píxeles / segundo.
 ```
 Ahora que tenemos la dirección en la que se quiere mover el jugador y la velocidad a la que se mueve el personaje, nos falta aplicar el movimiento.
 
-```
-func _physics_process(delta: float):
+```GDScript
+func _physics_process(delta):
 
     [...]
 
@@ -191,7 +190,7 @@ Antes de plantearnos cómo disparar... Necesitaremos algo que disparar, ¿no? Es
 
 Como con el personaje, vamos a añadirle un script al nodo raíz. De momento solo vamos a hacer que se mueva.
 
-```
+```GDScript
 extends Area2D
 
 const SPEED = 500 # Píxeles / segundo.
@@ -204,28 +203,29 @@ func _ready() -> void:
     move_dir = Vector2(cos(rotation), sin(rotation))
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta) -> void:
     # Mover la bala.
     position += move_dir * SPEED * delta
 ```
 
 ¿Por qué no usar el método `move_and_slide()` como con el personaje? Porque ese es un método para los nodos `KinematicBody2D` que no sirve para nuestro nodo `Area2D`, así que vamos a modificar directamente el valor de la variable `position`.
 
-Ahora que le hemos añadido lógica a la bala, toca hacer que el personaje dispare al hacer click. Esto, en otras palabras, sería crear una *instancia* de la escena `Bullet.tscn`. Volvemos al script `Player.gd`. Godot nos proporciona dos métodos muy útiles para manejar los inputs, `_input(event)` y `_unhandeled_input(event)`. La diferencia entre ambos es sutil, pero para esto nos viene mejor el segundo. Este método se llama cuando hay un input que no ha sido tratado, y dentro del mismo podemos comprobar de qué evento se trata. En particular nos interesa un evento relacionado con la acción `shoot` (la cual todavía no hemos definido).
+Ahora que le hemos añadido lógica a la bala, toca hacer que el personaje dispare al hacer click. Esto, en otras palabras, sería crear una *instancia* de la escena `Bullet.tscn`. Volvemos al script `Player.gd`. Godot nos proporciona dos métodos muy útiles para manejar los inputs, `_input(event)` y `_unhandeled_input(event)`. La diferencia entre ambos es sutil, pero para esto nos viene mejor el segundo. Este método se llama cuando hay un input que no ha sido tratado, y dentro del mismo podemos comprobar de qué evento se trata. En particular nos interesa un evento relacionado con la acción `shoot` (la cual ya hemos definido en el Mapa de Entrada).
 
-```
+```GDScript
 func _unhandled_input(event: InputEvent):
     if event.is_action_pressed("shoot"):
         shoot() # Disparar.
 ```
 
 Ahora mismo nuestro código está incompleto. He hecho referencia a un método `shoot()` que no está definido. Lo tenemos que crear nosotros. Este método es el que va a instanciar la bala. En Godot esto se hace de una manera un poco peculiar y que al principio asusta. Los pasos a seguir son:
-1- Crear una instancia de la escena `Bullet.tscn`.
-2- Darle las propiedades que nos interesan.
-3- Añadir la instancia a algún lugar de la escena principal
+1. Crear una instancia de la escena `Bullet.tscn`.
+2. Darle las propiedades que nos interesen.
+3. Añadir la instancia a algún lugar de la escena principal.
+
 Al final nos queda algo así:
 
-```
+```GDScript
 # Cargar la escena de la bala.
 const BULLET = preload("res://src/Bullet.tscn")
 
@@ -248,13 +248,13 @@ Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente s
 
 Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de nodo es muy útil cuando queremos monitorizar si una instancia de un objeto sale o entra en pantalla. Vamos a aprovecharnos de la señal `screen_exited`, la cual es emitida cuando el nodo sale de la pantalla. Para conectar la señal, seleccionamos el nuevo nodo en el panel del Árbol de Escena (Amarillo 3) y luego cambiamos a la pestaña Nodos en el panel Morado 4. Doble click en la señal que nos interesa, en este caso `screen_exited`, y en la ventana que nos aparece le damos a Conectar dejando todo como viene. 
 
-**¿Qué es una señal?***En pocas palabras, un nodo puede emitir una señal para informar de que ha ocurrido algo en particular. Otros nodos pueden escuchar esta señal y actuar en consecuencia.*
+**¿Qué es una señal?** *En pocas palabras, un nodo puede emitir una señal para informar de que ha ocurrido algo en particular. Otros nodos pueden escuchar esta señal y actuar en consecuencia.*
 
 ![panel de nodos](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/007.png?raw=true)
 
 Al conectar la señal nos aparece la cabecera de un nuevo método. Rellenamos el cuerpo con la función `queue_free()`, la cual libera un nodo de la escena.
 
-```
+```GDScript
 func _on_VisibilityNotifier2D_screen_exited() -> void:
     # La bala se ha salido de la pantalla. 
     queue_free() # Libera esta instancia.
@@ -263,13 +263,13 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 ## Enemigo
 Ahora que ya podemos movernos y disparar necesitamos algo de lo que huir y a lo que disparar. Vamos a hacer unos enemigos simples que sigan al jugador. Para ello creamos una nueva escena `Enemy.tscn` con los mismos nodos que en `Player.tscn` (raíz `KinematicBody2D`, hijos `Sprite` y `CollisionShape2D`). Configuramos los nodos y le damos un nuevo script `Enemy.gd` a la raíz. El código de los enemigos es bastante parecido a lo que ya hemos visto, solo que en este caso usaremos `move_and_collide()` para el movimiento.
 
-```
+```GDScript
 const SPEED = 50 # Píxeles / segundo.
 
 var to_follow
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta) -> void:
     if is_instance_valid(to_follow):
         # Moverse hacia to_follow
         var move_dir = global_position.direction_to(to_follow.global_position)
@@ -281,7 +281,7 @@ func _physics_process(delta: float) -> void:
 
 Si añadimos un enemigo a la escena principal veremos que no se mueve. Esto es porque la variable `to_follow` está sin inicializar, y por tanto el enemigo no tiene objetivo que seguir. Le daremos valor a esta variable desde un nuevo script en el nodo *World* de la escena principal, `World.gd`.
 
-```
+```GDScript
 extends Node2D
 
 
@@ -300,7 +300,7 @@ Godot ya nos ofrece un sistema de colisiones muy robusto. Como hemos podido prob
 
 Vamos a empezar añadiendo una variable `hp` (que significa *hit points*) para controlar cuánta vida le queda a una nave. También añadiremos unas funciones muy simples para recibir daño y morir. Tanto en `Player.gd` como en `Enemy.gd`:
 
-```
+```GDScript
 var hp = 3
 
 [...]
@@ -320,7 +320,7 @@ A la nave del jugador he decidido darle 3 puntos de vida y al enemigo tan solo 1
 
 Primero vamos con la bala. Los nodos de tipo `Area2D` tienen varias señales que emiten en función de si un cuerpo o área entra en su propia área, es decir, si colisionan con algo. En este caso nos interesa la señal `body_entered`, que se emite cuando un cuerpo (como un `KinematicBody2D`) entra en contacto con el `Area2D`. Vamos a conectar dicha señal a un nuevo método:
 
-```
+```GDScript
 func _on_Bullet_body_entered(body: Node) -> void:
     if body.has_method("take_damage"):
         body.take_damage()
@@ -341,8 +341,8 @@ Piensa en qué capas deberían estar las naves del jugador y enemigo y con cuál
 
 Ahora toca hacer que el enemigo haga daño a nuestra nave al chocar con nosotros. Podemos obtener información de la colisión al mover un cuerpo con el valor que devuelve `move_and_collide()`. Vamos a cambiar un poco el código del enemigo:
 
-```
-func _physics_process(delta: float) -> void:
+```GDScript
+func _physics_process(delta) -> void:
 
     [...]
 
@@ -363,7 +363,7 @@ Para implementar esto vamos a añadirle a la nave del jugador un nodo de tipo `T
 
 Ahora que tenemos el temporizador tenemos que añadir la lógica al código.
 
-```
+```GDScript
 # Para acceder al nodo InvencibilityTimer.
 onready var _invencibility_timer = $InvencibilityTimer
 
@@ -381,7 +381,7 @@ func take_damage():
 
 Ahora sí, la nave aguanta bastante más de 3 fotogramas.
 
-## Interfaz/
+## Interfaz
 Vamos a acabar con una interfaz sencilla. El jugador debería poder ver en todo momento cuánta vida le queda a su nave. Godot tiene una serie de nodos diseñados justo para esto, los nodos que heredan de `Control` (los verdes). Vamos a añadir nuevos nodos a nuestra escena principal. Un nodo `Control` llamado *UI* y un nodo `ProgressBar` llamado *HPBar*.
 
 ![escena main](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/011.png?raw=true)
@@ -393,7 +393,7 @@ Estos nodos tienen mogollón de variables de configuración, pero de momento vam
 
 Además, vamos a darle un script a *HPBar* para que monitorice la variable `hp` del nodo que le digamos. En `HPBar.gd`:
 
-```
+```GDScript
 extends ProgressBar
 
 
@@ -408,7 +408,7 @@ func _process(delta):
 
 Por último, tenemos que darle valor a la variable `to_monitor`. Esto lo haremos desde el nodo *Main*, la raíz de la escena principal. Le damos script a este nodo (`Main.gd`) y añadimos lo siguiente:
 
-```
+```GDScript
 extends Node
 
 onready var _player = $World/Player
