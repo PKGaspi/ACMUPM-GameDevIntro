@@ -198,12 +198,12 @@ const SPEED = 500 # Píxeles / segundo.
 var move_dir = Vector2.RIGHT
 
 
-func _ready() -> void:
+func _ready():
     # Calcular la dirección de movimiento en función de la rotación.
     move_dir = Vector2(cos(rotation), sin(rotation))
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta):
     # Mover la bala.
     position += move_dir * SPEED * delta
 ```
@@ -213,7 +213,7 @@ func _physics_process(delta) -> void:
 Ahora que le hemos añadido lógica a la bala, toca hacer que el personaje dispare al hacer click. Esto, en otras palabras, sería crear una *instancia* de la escena `Bullet.tscn`. Volvemos al script `Player.gd`. Godot nos proporciona dos métodos muy útiles para manejar los inputs, `_input(event)` y `_unhandeled_input(event)`. La diferencia entre ambos es sutil, pero para esto nos viene mejor el segundo. Este método se llama cuando hay un input que no ha sido tratado, y dentro del mismo podemos comprobar de qué evento se trata. En particular nos interesa un evento relacionado con la acción `shoot` (la cual ya hemos definido en el Mapa de Entrada).
 
 ```GDScript
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event):
     if event.is_action_pressed("shoot"):
         shoot() # Disparar.
 ```
@@ -244,7 +244,7 @@ func shoot():
 Todo esto ha sido mucho de golpe para una simple bala, ¿no? Ahora mismo ya debería estar todo. ¡Toca probar si funciona!
 
 #### Optimización
-Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Para ello, vamos a hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
+Si ejecutamos el juego y disparamos unas cuantas balas, vemos que rápidamente se salen de la ventana visible. No obstante, las instancias de dichas balas siguen ahí. Siguen consumiendo recursos de nuestro ordenador y, a la larga, podríamos tener miles o millones de balas. Por eso conviene hacer que las balas se "destruyan" o desaparezcan al salir de la ventana de juego.
 
 Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de nodo es muy útil cuando queremos monitorizar si una instancia de un objeto sale o entra en pantalla. Vamos a aprovecharnos de la señal `screen_exited`, la cual es emitida cuando el nodo sale de la pantalla. Para conectar la señal, seleccionamos el nuevo nodo en el panel del Árbol de Escena (Amarillo 3) y luego cambiamos a la pestaña Nodos en el panel Morado 4. Doble click en la señal que nos interesa, en este caso `screen_exited`, y en la ventana que nos aparece le damos a Conectar dejando todo como viene. 
 
@@ -255,7 +255,7 @@ Añadimos un nodo hijo a la bala de tipo `VisibilityNotifier2D`. Este tipo de no
 Al conectar la señal nos aparece la cabecera de un nuevo método. Rellenamos el cuerpo con la función `queue_free()`, la cual libera un nodo de la escena.
 
 ```GDScript
-func _on_VisibilityNotifier2D_screen_exited() -> void:
+func _on_VisibilityNotifier2D_screen_exited():
     # La bala se ha salido de la pantalla. 
     queue_free() # Libera esta instancia.
 ```
@@ -269,7 +269,7 @@ const SPEED = 50 # Píxeles / segundo.
 var to_follow
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta):
     if is_instance_valid(to_follow):
         # Moverse hacia to_follow
         var move_dir = global_position.direction_to(to_follow.global_position)
@@ -321,7 +321,7 @@ A la nave del jugador he decidido darle 3 puntos de vida y al enemigo tan solo 1
 Primero vamos con la bala. Los nodos de tipo `Area2D` tienen varias señales que emiten en función de si un cuerpo o área entra en su propia área, es decir, si colisionan con algo. En este caso nos interesa la señal `body_entered`, que se emite cuando un cuerpo (como un `KinematicBody2D`) entra en contacto con el `Area2D`. Vamos a conectar dicha señal a un nuevo método:
 
 ```GDScript
-func _on_Bullet_body_entered(body: Node) -> void:
+func _on_Bullet_body_entered(body):
     if body.has_method("take_damage"):
         body.take_damage()
         queue_free()
@@ -342,7 +342,7 @@ Piensa en qué capas deberían estar las naves del jugador y enemigo y con cuál
 Ahora toca hacer que el enemigo haga daño a nuestra nave al chocar con nosotros. Podemos obtener información de la colisión al mover un cuerpo con el valor que devuelve `move_and_collide()`. Vamos a cambiar un poco el código del enemigo:
 
 ```GDScript
-func _physics_process(delta) -> void:
+func _physics_process(delta):
 
     [...]
 
@@ -414,7 +414,7 @@ extends Node
 onready var _player = $World/Player
 onready var _hp_bar = $UI/HPBar
 
-func _ready() -> void:
+func _ready():
     _hp_bar.to_monitor = _player
 ```
 

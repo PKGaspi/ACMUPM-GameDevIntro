@@ -7,7 +7,7 @@ const SPEED = 50 # Píxeles / segundo.
 var to_follow
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta):
 	if is_instance_valid(to_follow):
 		# Moverse hacia to_follow
 		var move_dir = global_position.direction_to(to_follow.global_position)

@@ -26,7 +26,7 @@ func _physics_process(delta):
 	move_and_slide(input_dir * SPEED)
 
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
 		shoot() # Disparar.
 
