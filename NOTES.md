@@ -16,7 +16,7 @@ Vamos a crear un proyecto desde cero. Al pulsar el botón nos pide indicar la ru
 ### Interfaz
 Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí es donde se cocina la magia. Podemos distinguir cuatro paneles.
 
-![primer vistazo de godot](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/001.png?raw=true)
+![primer vistazo de godot](https://github.com/PKGaspi/ACMUPM-GameDevIntro2020/blob/master/.notes/001.png?raw=true)
 
 1. **Vista principal**: aquí podremos ver nuestra escena y nuestro código. Más adelante vemos lo que es una escena.
 2. **Explorador de archivos**: un navegador simple que muestra los archivos de nuestro proyecto.
@@ -26,7 +26,7 @@ Al confirmar la pantalla anterior nos encontramos con el editor de Godot. Aquí 
 Además, algunos de los paneles tienen varias pestañas. En el panel Amarillo 3 vemos también la pestaña Importación y en el Morado 4 la pestaña Nodos.
 
 ### Importar assets
-Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/tree/master/assets/sprites).
+Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos propios si prefieres. [Descarga mis assets aquí](https://github.com/PKGaspi/ACMUPM-GameDevIntro2020/tree/master/assets/sprites).
 
 **Nota.-** *Con los ficheros `.png` es suficiente.*
 
@@ -34,7 +34,7 @@ Para importar los assets basta con moverlos a alguna carpeta del proyecto. Puede
 
 Conviene comprobar las opciones de importación. Selecciona un sprite en el explorador de archivos y cambia a la pestaña Importación del panel Amarillo 3. Para sprites de un tamaño pequeño como los nuestros, conviene desactivar el filtrado bilineal. Después reimportamos el sprite y hacemos esto con los otros dos. También podemos cambiar el *preset* o plantilla para los próximos sprites que importemos en este proyecto.
 
-![opciones de importación](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/002.png?raw=true)
+![opciones de importación](https://github.com/PKGaspi/ACMUPM-GameDevIntro2020/blob/master/.notes/002.png?raw=true)
 
 ### Ajustes de proyecto
 Vamos a cambiar algunos ajustes del proyecto antes de empezar.
