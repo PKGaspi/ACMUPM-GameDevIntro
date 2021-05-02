@@ -5,7 +5,7 @@ Bienvenido al repositorio del taller de introducción al desarrollo de videojueg
 - El código fuente del juego. No lo mires si no lo necesitas, ¡así no se aprende!
 
 # Notas
-Para seguir el taller con mayor facilidad o en tu tiempo libre, echa un vistazo a las [Notas del Taller](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/NOTES.md).
+Para seguir el taller con mayor facilidad o en tu tiempo libre, echa un vistazo a las [Notas del Taller](https://github.com/PKGaspi/ACMUPM-GameDevIntro2020/blob/master/NOTES.md).
 
 # Contacto
 Si todavía no estás apuntado a ACM, ¿a qué esperas? Es gratis y hacemos cosas de este tipo a menudo. Te recomendamos echarle un vistazo a los siguientes enlaces:
