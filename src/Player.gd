@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 const SPEED = 200 # Píxeles / segundo.
@@ -8,7 +8,7 @@ const BULLET = preload("res://src/Bullet.tscn")
 
 var hp = 3
 # Para acceder al nodo InvencibilityTimer.
-onready var _invencibility_timer = $InvencibilityTimer
+@onready var _invencibility_timer = $InvencibilityTimer
 
 
 
@@ -23,7 +23,8 @@ func _physics_process(delta):
 	).normalized()
 	
 	# Mover.
-	move_and_slide(input_dir * SPEED)
+	set_velocity(input_dir * SPEED)
+	move_and_slide()
 
 
 func _unhandled_input(event):
@@ -33,7 +34,7 @@ func _unhandled_input(event):
 
 func shoot():
 	# Crear nueva instancia.
-	var bullet = BULLET.instance() 
+	var bullet = BULLET.instantiate() 
 	# Dar propiedades a la nueva instancia de la bala.
 	bullet.rotation = rotation
 	bullet.position = position

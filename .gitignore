@@ -107,3 +107,4 @@ $RECYCLE.BIN/
 /git_bash_here.bat
 
 # End of https://www.gitignore.io/api/linux,godot,emacs,windows
+.godot/
