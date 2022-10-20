@@ -1,21 +1,17 @@
 extends CharacterBody2D
 
-
 const SPEED = 200 # Píxeles / segundo.
 # Cargar la escena de la bala.
-const BULLET = preload("res://src/Bullet.tscn")
-
+const BULLET = preload("res://src/bullet.tscn")
 
 var hp = 3
 # Para acceder al nodo InvencibilityTimer.
 @onready var _invencibility_timer = $InvencibilityTimer
 
-
-
-func _physics_process(delta):
-    # Rotar el jugador para que mire al cursor.
-    rotation = global_position.direction_to(get_global_mouse_position()).angle()
+func _physics_process(delta: float) -> void:
+    global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
     
+
     # Calcular la dirección de movimiento.
     var input_dir = Vector2(
         Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -23,14 +19,12 @@ func _physics_process(delta):
     ).normalized()
     
     # Mover.
-    set_velocity(input_dir * SPEED)
+    velocity = input_dir * SPEED
     move_and_slide()
-
 
 func _unhandled_input(event):
     if event.is_action_pressed("shoot"):
         shoot() # Disparar.
-
 
 func shoot():
     # Crear nueva instancia.
@@ -40,7 +34,6 @@ func shoot():
     bullet.position = position
     # Añadir la bala como hijo del nodo padre.
     get_parent().add_child(bullet)
-
 
 func take_damage():
     # Comprobar si la nave es invencible.
@@ -52,7 +45,6 @@ func take_damage():
         # Comprobar si me muero.
         if hp <= 0:
             die() # Me muero.
-
 
 func die():
     queue_free() # Borrar de la escena principal.

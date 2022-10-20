@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvibmek1un5tr"]
+
+[ext_resource type="PackedScene" uid="uid://n8a747qg71rj" path="res://src/player.tscn" id="1_5qn1n"]
+[ext_resource type="Script" path="res://src/hp_bar.gd" id="1_dkxin"]
+[ext_resource type="Script" path="res://src/world.gd" id="1_fhpfr"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_rfw02"]
+[ext_resource type="PackedScene" uid="uid://se3q5nlen0t2" path="res://src/enemy.tscn" id="2_cnrpr"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_rfw02")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HPBar" type="ProgressBar" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 25.0
+mouse_filter = 2
+max_value = 3.0
+step = 1.0
+value = 3.0
+show_percentage = false
+script = ExtResource("1_dkxin")
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("1_fhpfr")
+
+[node name="Player" parent="World" instance=ExtResource("1_5qn1n")]
+position = Vector2(208, 130)
+
+[node name="Enemy" parent="World" instance=ExtResource("2_cnrpr")]
+position = Vector2(114, 189)
+
+[node name="Enemy2" parent="World" instance=ExtResource("2_cnrpr")]
+position = Vector2(365, 87)
