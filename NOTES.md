@@ -630,6 +630,8 @@ Ajustamos también el tamaño de *HPBar* para que sea bien visible. A cada nodo 
 damos estos valores en el Inspector.
 
 ![configuración nodo
+UI](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/014.png?raw=true)
+![configuración nodo
 UI](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/012.png?raw=true)
 ![configuración nodo
 HPBar](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro2020/blob/master/.notes/013.png?raw=true)
