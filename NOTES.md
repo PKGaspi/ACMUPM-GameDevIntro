@@ -595,7 +595,7 @@ Ahora que tenemos el temporizador tenemos que añadir la lógica al código.
 
 ```GDScript
 # Para acceder al nodo InvencibilityTimer.
-onready var _invencibility_timer = $InvencibilityTimer
+@onready var _invencibility_timer = $InvencibilityTimer
 
 func take_damage():
     # Comprobar si la nave es invencible.
