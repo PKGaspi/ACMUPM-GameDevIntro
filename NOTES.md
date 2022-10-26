@@ -41,7 +41,7 @@ Al confirmar la pantalla anterior nos encontramos con el editor de Godot. **Aqu�
 es donde se cocina la magia**. Podemos distinguir cuatro paneles.
 
 ![primer vistazo de
-godot](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/master/.notes/001.png?raw=true)
+godot](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/001.png?raw=true)
 
 1. **Vista principal**: aquí podremos ver nuestra escena y nuestro código. Más
    adelante vemos lo que es una escena.
@@ -62,7 +62,7 @@ esta imagen.
 Lo primero que vamos a hacer en nuestro proyecto es importar los assets. He
 preparado unos pocos muy simples para este taller, pero puedes hacer los tuyos
 propios si prefieres. [Descarga mis assets
-aquí](https://github.com/PKGaspi/ACMUPM-GameDevIntro/tree/master/assets/sprites).
+aquí](https://github.com/PKGaspi/ACMUPM-GameDevIntro/tree/main/assets/sprites).
 
 **Nota.-** *Descargar solamente los ficheros `.png`.*
 
@@ -155,7 +155,7 @@ facilitarte el trabajo más adelante. Para guardar la escena, pulsa Ctrl + S. Te
 recomiendo guardarla con el nombre `player.tscn` en una carpeta llamada `src`.
 
 ![escena
-main](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/003.png?raw=true)
+main](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/003.png?raw=true)
 
 Para la escena *Main* nos interesa un nodo raíz de tipo `Node` (Otro Nodo ->
 Node). Como hijo tendrá un nodo de tipo `Node2D` llamado *World*. El nodo
@@ -164,7 +164,7 @@ a mover la escena de nuestra nave para que no se quede en una esquina. Recuerda
 guardar la escena al terminar en `src/main.tscn`.
 
 ![escena
-player](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/004.png?raw=true)
+player](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/004.png?raw=true)
 
 Ahora, ¡podemos ejecutar nuestro juego por primera vez! Todavía no hemos hecho
 mucho, así que nada realmente emocionante va a pasar. Para hacerlo, pulsamos F5
@@ -185,7 +185,7 @@ Volvemos a la escena `player.tscn`, seleccionamos el nodo raíz y le damos al
 botón de añadir script. 
 
 ![añadir
-script](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/005.png?raw=true)
+script](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/005.png?raw=true)
 
 Nos saldrá una ventana para configurar algunas cosas, pero está todo bien tal y
 como viene. Le damos a Cargar y se abrirá el nuevo script. Por defecto, nos
@@ -238,7 +238,7 @@ acciones y asociarles eventos. Vamos a añadir cinco eventos, cuatro para
 movimiento y otro para disparar.
 
 ![mapa de
-entrada](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/006.png?raw=true)
+entrada](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/006.png?raw=true)
 
 **Para añadir una acción:** *escribe el nombre de la acción en el campo de
 arriba y dale al botón de Añadir de la derecha. Para añadir eventos a una
@@ -413,7 +413,7 @@ informar de que ha ocurrido algo en particular. Otros nodos pueden escuchar esta
 señal y actuar en consecuencia.*
 
 ![panel de
-nodos](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/007.png?raw=true)
+nodos](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/007.png?raw=true)
 
 Al conectar la señal nos aparece la cabecera de un nuevo método. Rellenamos el
 cuerpo con la función `queue_free()`, la cual libera un nodo de la escena.
@@ -535,7 +535,7 @@ a crear 3 capas de colisión: *player*, *enemy* y *player_bullet*. Esto se hace
 en Proyecto -> Ajustes de proyecto -> Física 2D.
 
 ![capas de
-colisión](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/008.png?raw=true)
+colisión](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/008.png?raw=true)
 
 Solo con crear las capas no basta, hay que añadir nuestros nodos a las capas a
 las que nos interesa, y también indicarles con qué capas deben colisionar. Por
@@ -543,7 +543,7 @@ ejemplo, la bala debe pertenecer a la capa *player_bullets* y que colisione con
 nodos en la capa *enemy*.
 
 ![capa y máscara de colisión de la
-bala](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/009.png?raw=true)
+bala](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/009.png?raw=true)
 
 Piensa en qué capas deberían estar las naves del jugador y enemigo y con cuáles
 deberían colisionar. Una vez configurado, comprueba que el juego funciona como
@@ -582,7 +582,7 @@ Para implementar esto vamos a añadirle a la nave del jugador un nodo de tipo
 temporizador. Le podemos poner estos parámetros.
 
 ![parámetros del nodo
-timer](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/010.png?raw=true)
+timer](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/010.png?raw=true)
 
 - `wait_time`: el tiempo inicial del temporizador.
 - `one_shot`: indica si queremos que el temporizador se quede parado al llegar a
@@ -620,7 +620,7 @@ llamado GUILayer, un nodo `Control` llamado *GUI* y un nodo `ProgressBar`
 llamado *HPBar*.
 
 ![escena
-main](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/011.png?raw=true)
+main](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/011.png?raw=true)
 
 Estos nodos tienen mogollón de variables de configuración, pero de momento vamos
 a ignorar la gran mayoría. Vamos a seleccionar el nodo *GUI*. En la parte
@@ -630,11 +630,11 @@ Ajustamos también el tamaño de *HPBar* para que sea bien visible. A cada nodo 
 damos estos valores en el Inspector.
 
 ![configuración nodo
-UI](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/014.png?raw=true)
+UI](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/014.png?raw=true)
 ![configuración nodo
-UI](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/012.png?raw=true)
+UI](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/012.png?raw=true)
 ![configuración nodo
-HPBar](https://github.com/rapsaGnauJ/ACMUPM-GameDevIntro/blob/master/.notes/013.png?raw=true)
+HPBar](https://github.com/PKGaspi/ACMUPM-GameDevIntro/blob/main/.notes/013.png?raw=true)
 
 Además, vamos a darle un script a *HPBar* para que monitorice la variable `hp`
 del nodo que le digamos. En `HPBar.gd`:
