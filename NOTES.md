@@ -75,13 +75,13 @@ Vamos a cambiar algunos ajustes del proyecto antes de empezar.
 
 En el menú superior, vamos a Proyecto -> Ajustes de Proyecto:
 - Montior -> Ventana
--- Size
---- Width: 480
---- Height: 270
--- Stretch
---- Mode: canvas_items
+   - Size
+      - Width: 480
+      - Height: 270
+   - Stretch
+      - Mode: canvas_items
 - Renderización -> Texturas
--- Default Texture Filter: Nearest
+   - Default Texture Filter: Nearest
 
 ### Nodos y Escenas
 De la documentación de Godot, "los nodos son los bloques de construcción fundamentales de tu juego. Son como los ingredientes de una receta. Hay docenas de tipos que pueden mostrar una imagen, reproducir un sonido, representar una cámara y mucho más."
