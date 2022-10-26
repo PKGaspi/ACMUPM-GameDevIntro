@@ -298,7 +298,7 @@ func _physics_process(delta):
 
     # Mover.
     velocity = input_dir * SPEED
-    move_and_slide(input_dir * SPEED)
+    move_and_slide()
 ```
 
 Ejecuta el juego de nuevo y prueba el movimiento. Si no te convence la velocidad
